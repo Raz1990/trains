@@ -2,4 +2,9 @@
   text-transform: capitalize;
   text-decoration: underline;
   color: blue;
+  cursor: pointer;
+
+  :hover {
+    color: rgba(0, 0, 255, 0.5);
+  }
 }

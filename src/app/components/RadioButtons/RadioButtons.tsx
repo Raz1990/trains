@@ -12,6 +12,8 @@ export function RadioButtons({ options }: RadioButtonsProps) {
           key={option.value}
           value={option.value}
           label={option.label}
+          onChangeRadio={option.onChangeRadio}
+          checked={option.checked}
         />
       ))}
     </div>

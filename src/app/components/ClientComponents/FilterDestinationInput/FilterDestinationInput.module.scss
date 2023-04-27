@@ -1,0 +1,15 @@
+.inputContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  input {
+    padding: 5px;
+  }
+
+  button {
+    padding: 5px;
+    cursor: pointer;
+  }
+}

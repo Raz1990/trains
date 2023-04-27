@@ -3,7 +3,7 @@ import styles from "./page.module.scss";
 import ContentContainer from "@/app/components/ClientComponents/ContentContainer/ContentContainer";
 
 export default async function BaselPage() {
-  const data = await getData("departure");
+  const data = await getData("basel", "departure");
 
   return (
     <main className={styles.baselPage}>
