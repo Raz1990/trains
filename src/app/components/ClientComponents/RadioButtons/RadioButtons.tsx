@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./RadioButtons.module.scss";
-import { RadioButton, RadioButtonProps } from "../RadioButton/RadioButton";
+import { RadioButton, RadioButtonProps } from "./RadioButton/RadioButton";
 
 type RadioButtonsProps = { options: RadioButtonProps[] };
 

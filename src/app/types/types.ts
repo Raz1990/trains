@@ -8,12 +8,7 @@ export type StationBoardType = {
   to: string; // final destination
 };
 
-export type DepartureDataType = {
-  stationName: string;
-  stationboard: StationBoardType[];
-};
-
-export type ArrivalDataType = {
+export type ApiDataType = {
   stationName: string;
   stationboard: StationBoardType[];
 };

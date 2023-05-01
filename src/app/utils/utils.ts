@@ -1,7 +1,7 @@
-import { DepartureDataType, StationBoardType } from "../types/types";
+import { ApiDataType, StationBoardType } from "../types/types";
 
 export function departureMapper(data: any) {
-  const relevantData: DepartureDataType = {
+  const relevantData: ApiDataType = {
     stationName: data.station.name,
     stationboard: data.stationboard.map((train: any) => {
       const filteredData: StationBoardType = {
@@ -23,14 +23,13 @@ export function departureMapper(data: any) {
   return relevantData;
 }
 
-export const filterByDestination = (
-  data: DepartureDataType,
-  destination: string
-) => {
-  data.stationboard = data.stationboard.filter(
-    (e) => e.to.toLocaleLowerCase() === destination.toLocaleLowerCase()
+export const filterByDestination = (data: ApiDataType, destination: string) => {
+  const filteredStationboard = data.stationboard.filter((stationBoard) =>
+    stationBoard.to
+      .toLocaleLowerCase()
+      .includes(destination.toLocaleLowerCase())
   );
-  return data;
+  return filteredStationboard;
 };
 
 export const extractDestinationList = (stationboard: StationBoardType[]) => {

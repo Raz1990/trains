@@ -1,34 +1,25 @@
-"use client";
-
 import styles from "./FilterDestinationInput.module.scss";
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, useState } from "react";
 
 type FilterDestinationInputProps = {
   availableDestinations: string[];
-  onChangeText: any;
+  onChangeFilter: (destination: string) => void;
 };
 
 export default function FilterDestinationInput({
   availableDestinations,
-  onChangeText,
+  onChangeFilter,
 }: FilterDestinationInputProps) {
   const [filterValue, setFilterValue] = useState<string>("");
-  const inputRef = useRef<HTMLInputElement>(null);
 
   const updateFilter = (destination: string = "") => {
-    onChangeText(destination);
+    setFilterValue(destination);
+    onChangeFilter(destination);
   };
 
-  const _onChangeText = (e: ChangeEvent<HTMLInputElement>) => {
+  const onChangeText = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setFilterValue(value);
-    const normalizedDestinations = availableDestinations
-      .map((destination) => destination.toLocaleLowerCase())
-      .includes(value.toLowerCase());
-    if (value === "" || normalizedDestinations) {
-      updateFilter(value);
-      inputRef.current?.blur();
-    }
+    updateFilter(value);
   };
 
   return (
@@ -38,8 +29,7 @@ export default function FilterDestinationInput({
         autoComplete="on"
         list="destinations"
         value={filterValue}
-        onChange={_onChangeText}
-        ref={inputRef}
+        onChange={onChangeText}
       />
       <datalist id="destinations">
         {availableDestinations.map((destination) => (
@@ -48,8 +38,7 @@ export default function FilterDestinationInput({
       </datalist>
       <button
         onClick={() => {
-          setFilterValue("");
-          updateFilter();
+          updateFilter("");
         }}
       >
         Clear

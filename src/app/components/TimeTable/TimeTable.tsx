@@ -1,15 +1,21 @@
 import React from "react";
 import styles from "./TimeTable.module.scss";
-import { DepartureDataType, StationBoardType } from "@/app/types/types";
+import {
+  ApiDataType,
+  StationBoardType,
+  TimeTableType,
+} from "@/app/types/types";
 
-type TimeTableProps = { data: DepartureDataType };
+type TimeTableProps = { data: ApiDataType; timeType: TimeTableType };
 
-export function TimeTable({ data }: TimeTableProps) {
+export function TimeTable({ data, timeType }: TimeTableProps) {
+  const isDeparture = timeType === "departure";
+
   const tableHead = (
     <thead>
       <tr>
-        <th>Departure Time</th>
-        <th>Passes Through</th>
+        <th>{timeType} Time</th>
+        {isDeparture && <th>Passes Through</th>}
         <th>Destination</th>
       </tr>
     </thead>
@@ -20,11 +26,11 @@ export function TimeTable({ data }: TimeTableProps) {
     return joinedStations.length !== 0 ? joinedStations : "N/A";
   };
 
-  const trainRowData = (station: StationBoardType) => {
+  const trainRowData = (station: StationBoardType, idx: number) => {
     return (
-      <tr key={`${station.departure.toString()} - ${station.to}`}>
+      <tr key={`${idx} - ${station.departure.toString()} - ${station.to}`}>
         <td>{station.departure}</td>
-        <td>{passStationsData(station.stationsList)}</td>
+        {isDeparture && <td>{passStationsData(station.stationsList)}</td>}
         <td>{station.to}</td>
       </tr>
     );
